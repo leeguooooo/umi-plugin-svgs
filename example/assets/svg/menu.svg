@@ -1,0 +1,17 @@
+<svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<mask id="prefix__a" fill="#fff">
+		<path
+			d="M6.5 2.203c0-.664-.543-1.214-1.196-1.092a6.5 6.5 0 107.585 7.585c.122-.653-.428-1.196-1.092-1.196-.665 0-1.186.55-1.379 1.186a4.093 4.093 0 11-5.104-5.104C5.95 3.389 6.5 2.868 6.5 2.203z" />
+	</mask>
+	<path
+		d="M6.5 2.203c0-.664-.543-1.214-1.196-1.092a6.5 6.5 0 107.585 7.585c.122-.653-.428-1.196-1.092-1.196-.665 0-1.186.55-1.379 1.186a4.093 4.093 0 11-5.104-5.104C5.95 3.389 6.5 2.868 6.5 2.203z"
+		stroke="#fff" stroke-width="4" mask="url(#prefix__a)" />
+	<path d="M8 0a6 6 0 016 6L6 8l2-8z" fill="url(#prefix__prefix__paint0_linear_4307_12286)" />
+	<defs>
+		<linearGradient id="prefix__prefix__paint0_linear_4307_12286" x1="11.5" y1="2" x2="6" y2="8.5"
+			gradientUnits="userSpaceOnUse">
+			<stop stop-color="#fff" />
+			<stop offset="1" stop-color="#fff" stop-opacity="0" />
+		</linearGradient>
+	</defs>
+</svg>
