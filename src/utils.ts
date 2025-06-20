@@ -1,31 +1,32 @@
 import cpy from 'cpy';
 import { mkdirSync, readdir, readFile, statSync, writeFileSync } from 'fs';
 import path, { dirname, resolve } from 'path';
+import { SVGGeneratorOptions } from './types';
 
 /**
  * 批量生成 react-svg 组件
  * @param param0
  * @returns
  */
-export async function reactSVGGeneratorFromSVGDir({ output, entry }) {
+export async function reactSVGGeneratorFromSVGDir({ output, entry }: SVGGeneratorOptions) {
   ensure(output);
-  const write = (data, flag = 'a+') => {
+  const write = (data: string | Buffer, flag = 'a+') => {
     writeFileSync(resolve(output, 'svg.tsx'), data, {
       flag,
     });
   };
 
   readSvgs(entry)
-    .then((data: string[]) => {
-      write(`import React from 'react';\nexport default {`, 'w+');
-      data.forEach((item: string) => {
+    .then((data) => {
+      write(`import React from 'react';\nexport const TYPE_SVG_MAP = {`, 'w+');
+      data.forEach((item) => {
         Object.keys(item).forEach((key, i) => {
           write(`${convertStringToCamelCase(key)}: (props: any) => (`);
           const str = item[key];
           const reg = /([a-z])-([a-z])/g;
           const content = str
             .replace(/<svg(.*?)>/, `<svg$1 {...props}>`)
-            .replace(reg, (words) => {
+            .replace(reg, (words: string) => {
               const [$1, , $2] = words.split('');
               return $1 + $2.toUpperCase();
             });
@@ -43,7 +44,7 @@ export async function reactSVGGeneratorFromSVGDir({ output, entry }) {
 }
 
 // 读取SVG文件夹下所有svg
-function readSvgs(SVGPath) {
+function readSvgs(SVGPath: string): Promise<Record<string, string>[]> {
   return new Promise((resolve, reject) => {
     readdir(SVGPath, function (err, files) {
       if (err) reject(err);
@@ -57,7 +58,7 @@ function readSvgs(SVGPath) {
 }
 
 // 读取单个文件
-function readfile(SVGPath, filename) {
+function readfile(SVGPath: string, filename: string): Promise<Record<string, string>> {
   return new Promise((resolve, reject) => {
     readFile(path.join(SVGPath, filename), 'utf-8', function (err, data) {
       if (err) reject(err);
@@ -91,14 +92,9 @@ async function copySVGComponents({ output }: { output: string }) {
   });
 }
 
-function convertStringToCamelCase(sentence: string) {
-  return sentence.replace(
-    /(?:^\w|[A-Z]|\b\w|\s+)/g,
-    function (camelCaseMatch, i) {
-      if (+camelCaseMatch === 0) return '';
-      return i === 0
-        ? camelCaseMatch.toLowerCase()
-        : camelCaseMatch.toUpperCase();
-    },
-  );
+export function convertStringToCamelCase(sentence: string): string {
+  // Replace hyphens and spaces with camelCase
+  return sentence
+    .replace(/[-_\s]+(.)?/g, (_, char) => char ? char.toUpperCase() : '')
+    .replace(/^./, str => str.toLowerCase());
 }

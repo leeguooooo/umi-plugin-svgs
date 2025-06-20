@@ -1,5 +1,6 @@
-import { IApi } from '@umijs/types';
-import { chalk, chokidar } from '@umijs/utils';
+import type { IApi } from 'umi';
+import { chalk } from '@umijs/utils';
+import chokidar from 'chokidar';
 import { resolve } from 'path';
 import { reactSVGGeneratorFromSVGDir } from './utils';
 export default (api: IApi) => {

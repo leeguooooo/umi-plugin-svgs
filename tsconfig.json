@@ -13,6 +13,11 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "experimentalDecorators": true,
-    "declaration": false
-  }
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true
+  },
+  "exclude": ["lib", "es", "dist", "example", "test-umi4-project", "node_modules"]
 }

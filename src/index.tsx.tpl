@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import React from 'react'
-import TYPE_SVG_MAP from './svg'
+import { TYPE_SVG_MAP } from './svg'
 
 export { TYPE_SVG_MAP };
 export type ZHSvgInterface = typeof TYPE_SVG_MAP
